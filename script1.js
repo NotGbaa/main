@@ -40,7 +40,7 @@ indietro.onclick = () => {
 
 submit.onclick = () => {
   if (email.value === profili[0].email && password.value === profili[0].password) {
-    window.location.href = "pagina2.html";
+    window.location.href = "admin.html";
   }
   else {
     for (let i = 1; i < profili.length; i++) {

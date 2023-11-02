@@ -20,10 +20,9 @@
 </head>
 
 <body>
-  <button id="indietro" type="submit" class="btn btn-primary">Indietro</button>
-
-  <nav class="navbar navbar-light bg-light">
-    <form class="container-fluid justify-content-start">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button id="indietro" type="submit" class="btn btn-primary">Indietro</button>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Inserisci struttura </button>
@@ -40,33 +39,35 @@
               <form style="text-align: center;">
                 <div class="form-group">
                   <label for="name">Nome struttura</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter name">
+                  <input type="text" class="form-control" id="nome" placeholder="Enter name">
                 </div>
                 <div class="form-group">
                   <label for="ind">Indirizzo</label>
-                  <input type="text" class="form-control" id="ind" placeholder="Enter address">
+                  <input type="text" class="form-control" id="indirizzo" placeholder="Enter address">
                 </div>
                 <div class="form-group">
                   <label for="descr">Descrizione</label>
-                  <input type="text" class="form-control" id="ind" placeholder="Enter a description">
+                  <input type="text" class="form-control" id="descrizione" placeholder="Enter a description">
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" class="close" data-dismiss="modal"
-                aria-label="Close">Inserisci Struttura</button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal-close" id="inserisci">Inserisci
+                Struttura</button>
             </div>
           </div>
         </div>
       </div>
-    </form>
+      <!-- Fine modale -->
+      </form>
   </nav>
 
 
+  <table id="tabella" class="table table-dark table-hover" style="width:100%">
+  </table>
 
 
-
-  <script src="script2.js"></script>
+  <script src="admin.js"></script>
   <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
 </body>
 
