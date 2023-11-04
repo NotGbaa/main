@@ -1,5 +1,4 @@
-import { loadCache } from "./remote_cache_load";
-import { saveCache } from "./remote_cache_save";
+import { loadCache, saveCache } from "./remote_cache.js";
 
 const registerButton = document.getElementById("register_button");
 const backButton = document.getElementById("back_button");
@@ -9,18 +8,13 @@ let profili = [];
 
 
 registerButton.onclick = () => {
-  console.log('click');
-  loadCache("profili").then((response) => {
-    console.log('cache loaded');
-
-    console.log(JSON.parse(response.result));
+ loadCache("profili").then((response) => {
     profili = JSON.parse(response.result);
+    if (email.value !== "" && password.value !== "") {
+      profili.push({ "email": email.value, "password": password.value });
+      saveCache(profili, "profili");
+      backButton.click();
+    }
   });
 
-  if (emailR.value !== "" && passwordR.value !== "") {
-    profili.push({ "email": email.value, "password": password.value });
-    saveCache(profili, "profili");
-
-    backButton.click();
-  }
 }

@@ -16,13 +16,13 @@
 <body style="background-color:powderblue;">
   <h1 style="text-align: center;">B&B</h1>
   <br>
-  <div id="divR" style="text-align: center">Email/Password errato, Riprova. </div>
+  <div id="divR" style="text-align: center; display:none;">Email/Password errato, Riprova. </div>
   <br><br><br><br>
 
   <a href="register.html" class="btn btn-primary">Registrati</a>
 
+  <!-- FORM DI LOGIN -->
   <form id="log" style="text-align: center;" action="javascript:void(0)">
-    <button id="registrati" type="submit" class="btn btn-primary">Registrati</button>
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -32,38 +32,11 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="password" placeholder="Password">
     </div>
-  </form>
-
-
-
-  <form id="reg" style="text-align: center;" action="javascript:void(0)">
-    <button id="indietro" type="submit" class="btn btn-primary">Indietro</button>
-    <h4>Registrati al B&B</h4>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="emailR" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">Inserisci la tua email per la registrazione.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="passwordR" placeholder="Password">
-      <small id="emailHelp" class="form-text text-muted">Crea una password sicura.</small>
-    </div>
-  </form>
-
-
-  <div id="div" class="text-center">
     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-  </div>
-  <div id="div2" class="text-center">
-    <button id="submit2" type="submit" class="btn btn-primary">Submit</button>
-  </div>
+  </form>
+  <!-- FINE FORM DI LOGIN -->
 
-
-
-  <script src="script1.js"></script>
-
-
+  <script src="script1.js" type="module"></script>
   <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
 </body>
 

@@ -2,6 +2,9 @@ import { calcolaDistanza } from "./calcola.js";
 const container = document.getElementById('popup');
 const content = document.getElementById('popup-content');
 const closer = document.getElementById('popup-closer');
+const urlGeocode =
+  "https://api.geoapify.com/v1/geocode/search?apiKey=5e8d464f7a6f48f281288c93c1531355&text=%PLACE";
+let data = [];
 let overlay;
 
 function setLayers(map) {
@@ -75,20 +78,44 @@ function initOverlay(map, points) {
   });
 
 }
-
+const action = (place) => {
+  //sostituisce a %PLACE il luogo indicato da noi in place
+  let url = urlGeocode.replace("%PLACE", place);
+  callRemote(url, (result) => {
+    let features = result.features;
+    for (let index = 0; index < features.length; index++) {
+      let res = features[index];
+      let point = {
+        lonlat: [res.properties.lon, res.properties.lat]
+      };
+      data.push(point);
+      render(data);
+    }
+  });
+};
 // create map
 const map = new ol.Map({ target: document.querySelector('.map') });
 setLayers(map);
 setCenter(map, [9.0915, 45.2765]);
-let distanza = calcolaDistanza({ lonlat: [9.2415, 45.4965] }, [9.0915, 45.2765]);
+//action(/*andra inserizo il dizionario in posizione di indirizzo*/);
+
+let distanza = calcolaDistanza(point.lonlat, [9.0915, 45.2765]);
 let distanzaMax = 0;
 if (distanzaMax < distanza) {
   distanzaMax = distanza;
 }
 setZoom(map, distanzaMax);
-addMarker(map, { lonlat: [9.2415, 45.4965], name: "Molinari" });
-addMarker(map, { lonlat: [9.191926, 45.464098], name: "Duomo" });
-addMarker(map, { lonlat: [3.6, 35.464098], name: "Duomo" });
+addMarker(map, point.lonlat /*andrà inserito il dizionario in posizione descrizione*/);
 initOverlay(map);
+
+const callRemote = (url, callback) => {
+  fetch(url).then((response) => {
+    response.json().then(callback);
+  });
+};
+
+
+
+
 
 

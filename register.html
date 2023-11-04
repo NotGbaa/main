@@ -16,8 +16,8 @@
 <body style="background-color:powderblue;">
   <h1 style="text-align: center;">B&B</h1>
   <br>
-  <form id="reg" style="text-align: center;">
-    <a href="index.html"class="btn btn-primary">Indietro</a>
+  <form id="reg" style="text-align: center;" action="javascript:void(0)">
+    <a href="index.html" class="btn btn-primary" id="back_button">Indietro</a>
     <h4>Registrati al B&B</h4>
     <div class="form-group">
       <label for="email">Email address</label>
@@ -29,9 +29,10 @@
       <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Password">
       <small id="passwordHelp" class="form-text text-muted">Crea una password sicura.</small>
     </div>
+    <button id="register_button" class="btn btn-primary">Registrati</button>
   </form>
 
-  <script src="./register.js"></script>
+  <script src="./register.js" type="module"></script>
   <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right"></script>
 </body>
 
