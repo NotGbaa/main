@@ -1,9 +1,7 @@
 const token = "4a318de6-2f15-4a2e-9161-a71279c9c016";
 
 export const saveCache = (dict, key) => {
-  console.log("saveCache", dict);
-
-  fetch("https://ws.progettimolinari.it/cache/set", {
+ fetch("https://ws.progettimolinari.it/cache/set", {
     method: "Post",
     headers: {
       "content-type": "application/json",
@@ -20,9 +18,7 @@ export const saveCache = (dict, key) => {
 }
 
 export const loadCache = (key) => {
-  console.log("loadCache");
-
-  return new Promise((resolve, reject) => {
+ return new Promise((resolve, reject) => {
     fetch("https://ws.progettimolinari.it/cache/get", {
       method: "Post",
       headers: {

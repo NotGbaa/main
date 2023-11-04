@@ -3,15 +3,7 @@ import { saveCache, loadCache } from "./remote_cache.js"
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
-const submit2 = document.getElementById("submit2");
-const indietro = document.getElementById("indietro");
-const registrati = document.getElementById("registrati");
-const div = document.getElementById("div");
-const divR = document.getElementById("divR");
-const log = document.getElementById("log");
 let profili = [];
-const loggedIn = true;
-const token = "4a318de6-2f15-4a2e-9161-a71279c9c016";
 
 loadCache("profili").then(
   result => {
@@ -36,7 +28,6 @@ const render = () => {
 }
 render();
 */
-
 
 
 email.addEventListener("input", toggleSubmitButton);
