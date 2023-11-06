@@ -105,8 +105,8 @@ loadCache("strutture").then(addresses => {
     data = addresses;
     let distanzaMax = 0;
     data.forEach((marker) => {
-      action(data.indirizzo[marker]);
-      addMarker(map, marker);
+      let punto = action(data.indirizzo[marker]);
+      addMarker(map, punto, data.descrizione[marker]);
       let distanza = calcolaDistanza(marker.lonlat, [12.4963655, 41.9027835]);
       console.log(distanza);
       if (distanzaMax < distanza) {

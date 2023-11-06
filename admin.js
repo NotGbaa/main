@@ -24,8 +24,8 @@ inserisci.onclick = () => {
     strutture = response;
     if (nome.value !== "" && indirizzo.value !== "" && descrizione.value !== "") {
       strutture.push({ "nome": nome.value, "indirizzo": indirizzo.value, "descrizione": descrizione.value });
-      saveCache(strutture, "strutture");
-      console.log(strutture);
+      let str = JSON.stringify(strutture);
+      saveCache(str, "strutture");
     }
   });
   render();
