@@ -33,6 +33,16 @@ inserisci.onclick = () => {
 
 
 const render = () => {
-  htmlTab += table.replace("%NAME", nome.value).replace("%ADDRESS", indirizzo.value).replace("%DESCRIPTION", descrizione.value);
-  tabella.innerHTML = htmlTab;
+  loadCache("strutture").then(structure => {
+    action();
+    if (structure) {
+      data = structure;
+      strutture.forEach((element) => {
+        htmlTab += table.replace("%NAME", strutture.nome[element]).replace("%ADDRESS", strutture.indirizzo[element]).replace("%DESCRIPTION", strutture.descrizione[element]);
+        tabella.innerHTML = htmlTab;
+      })
+    }
+
+  });
 };
+

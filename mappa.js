@@ -91,7 +91,6 @@ const action = (place) => {
         lonlat: [res.properties.lon, res.properties.lat]
       };
       data.push(point);
-      render(data);
     }
   });
 };
@@ -102,12 +101,11 @@ setCenter(map, [9.0915, 45.2765]);
 
 // Leggo i dati dalla cache remota 
 loadCache("strutture").then(addresses => {
-  action();
   if (addresses) {
     data = addresses;
     let distanzaMax = 0;
     data.forEach((marker) => {
-      console.log("marker: ", marker);
+      action(data.indirizzo[marker]);
       addMarker(map, marker);
       let distanza = calcolaDistanza(marker.lonlat, [12.4963655, 41.9027835]);
       console.log(distanza);
