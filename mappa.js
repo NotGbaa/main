@@ -28,11 +28,11 @@ function setZoom(map, maxDist = 1) {
   if (maxDist < 2) zoom = 8;
   map.getView().setZoom(zoom); // fissa il livello di zoom
 }
-function addMarker(map, point) {
+function addMarker(map, point, descrizione) {
   const feature = new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.fromLonLat(point.lonlat))
   });
-  feature.name = point.name;
+  feature.name = descrizione;
   const layer = new ol.layer.Vector({
     source: new ol.source.Vector({
       features: [feature]
@@ -40,7 +40,7 @@ function addMarker(map, point) {
     style: new ol.style.Style({
       image: new ol.style.Icon({
         anchor: [0.5, 1],
-        crossOrigin: 'anonymous',
+        crossOrigin: descrizione,
         src: 'https://docs.maptiler.com/openlayers/default-marker/marker-icon.png',
       })
     })
@@ -80,20 +80,6 @@ function initOverlay(map, points) {
 
 }
 
-const action = (place) => {
-  //sostituisce a %PLACE il luogo indicato da noi in place
-  let url = urlGeocode.replace("%PLACE", place);
-  callRemote(url, (result) => {
-    let features = result.features;
-    for (let index = 0; index < features.length; index++) {
-      let res = features[index];
-      let point = {
-        lonlat: [res.properties.lon, res.properties.lat]
-      };
-      data.push(point);
-    }
-  });
-};
 // create map
 const map = new ol.Map({ target: document.querySelector('.map') });
 setLayers(map);
@@ -105,10 +91,9 @@ loadCache("strutture").then(addresses => {
     data = addresses;
     let distanzaMax = 0;
     data.forEach((marker) => {
-      let punto = action(data.indirizzo[marker]);
-      addMarker(map, punto, data.descrizione[marker]);
-      let distanza = calcolaDistanza(marker.lonlat, [12.4963655, 41.9027835]);
-      console.log(distanza);
+     addMarker(map, marker.lonlat, marker.descrizione);
+      let distanza = calcolaDistanza(marker.lonlat.lonlat, [12.4963655, 41.9027835]);
+      console.log("distanza",distanza);
       if (distanzaMax < distanza) {
         distanzaMax = distanza;
       }
@@ -126,13 +111,6 @@ loadCache("strutture").then(addresses => {
 //action(/*andra inserito il dizionario in posizione di indirizzo*/);
 //addMarker(map, point.lonlat /*andrà inserito il dizionario in posizione descrizione*/);
 initOverlay(map);
-
-const callRemote = (url, callback) => {
-  fetch(url).then((response) => {
-    response.json().then(callback);
-  });
-};
-
 
 
 

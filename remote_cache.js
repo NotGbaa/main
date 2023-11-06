@@ -29,6 +29,7 @@ export const loadCache = (key) => {
     })
       .then((element) => element.json())
       .then(response => {
+        console.log("response",response)
         resolve(JSON.parse(response.result));
       })
       .catch((error) => reject(error));
