@@ -11,25 +11,6 @@ loadCache("profili").then(
     profili = result
   })
 
-/*
-const render = () => {
-  if (loggedIn) {
-    log.classList.remove("visible");
-    log.classList.add("hidden");    
-    reg.classList.remove("hidden");
-    reg.classList.add("visible");
-  } else {
-    reg.classList.remove("visible");
-    reg.classList.add("hidden");
-    log.classList.remove("hidden");
-    log.classList.add("visible");        
-
-  }
-}
-render();
-*/
-
-
 email.addEventListener("input", toggleSubmitButton);
 password.addEventListener("input", toggleSubmitButton);
 
@@ -44,8 +25,7 @@ function toggleSubmitButton() {
 submit.onclick = () => {
 
   loadCache("profili").then((response) => {
-    console.log(JSON.parse(response.result));
-    profili = JSON.parse(response.result);
+    profili = response;
     if (email.value === profili[0].email && password.value === profili[0].password) {
       window.location.href = "admin.html";
     }

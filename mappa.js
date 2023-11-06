@@ -1,4 +1,5 @@
 import { calcolaDistanza } from "./calcola.js";
+import { loadCache, saveCache } from "./remote_cache.js";
 const container = document.getElementById('popup');
 const content = document.getElementById('popup-content');
 const closer = document.getElementById('popup-closer');
@@ -78,6 +79,7 @@ function initOverlay(map, points) {
   });
 
 }
+
 const action = (place) => {
   //sostituisce a %PLACE il luogo indicato da noi in place
   let url = urlGeocode.replace("%PLACE", place);
@@ -97,15 +99,34 @@ const action = (place) => {
 const map = new ol.Map({ target: document.querySelector('.map') });
 setLayers(map);
 setCenter(map, [9.0915, 45.2765]);
-//action(/*andra inserizo il dizionario in posizione di indirizzo*/);
 
-let distanza = calcolaDistanza(point.lonlat, [9.0915, 45.2765]);
-let distanzaMax = 0;
-if (distanzaMax < distanza) {
-  distanzaMax = distanza;
-}
-setZoom(map, distanzaMax);
-addMarker(map, point.lonlat /*andrà inserito il dizionario in posizione descrizione*/);
+// Leggo i dati dalla cache remota 
+loadCache("strutture").then(addresses => {
+  action();
+  if (addresses) {
+    data = addresses;
+    let distanzaMax = 0;
+    data.forEach((marker) => {
+      console.log("marker: ", marker);
+      addMarker(map, marker);
+      let distanza = calcolaDistanza(marker.lonlat, [12.4963655, 41.9027835]);
+      console.log(distanza);
+      if (distanzaMax < distanza) {
+        distanzaMax = distanza;
+      }
+    })
+    //dove si fa il calcolo distanza andrebbe fatto una gestione che divida la distanza massima per 16 e in ogni caso setti lo zoom in un numero preciso cosi imposti un valore fisso ma deve essere dinamico
+    console.log("distanzaMax prima = ", distanzaMax);
+    if (distanzaMax < 1) distanzaMax = 1
+    setZoom(map, distanzaMax);
+    console.log("distanzaMax= ", distanzaMax);
+  }
+
+});
+
+
+//action(/*andra inserito il dizionario in posizione di indirizzo*/);
+//addMarker(map, point.lonlat /*andrà inserito il dizionario in posizione descrizione*/);
 initOverlay(map);
 
 const callRemote = (url, callback) => {

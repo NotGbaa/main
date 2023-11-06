@@ -9,7 +9,7 @@ let profili = [];
 
 registerButton.onclick = () => {
  loadCache("profili").then((response) => {
-    profili = JSON.parse(response.result);
+    profili = response;
     if (email.value !== "" && password.value !== "") {
       profili.push({ "email": email.value, "password": password.value });
       saveCache(profili, "profili");
